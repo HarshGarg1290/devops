@@ -2,12 +2,14 @@ package com.example.twitterapp.config;
 
 import org.h2.tools.Server;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import java.sql.SQLException;
 
 @Configuration
+@Profile("dev")
 public class H2ServerConfiguration {
 
     private Server webServer;
