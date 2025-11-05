@@ -3,8 +3,8 @@ package com.example.twitterapp.config;
 import org.h2.tools.Server;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import java.sql.SQLException;
 
 @Configuration
