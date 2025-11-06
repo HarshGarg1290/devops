@@ -9,6 +9,8 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Lob
+    @Column(columnDefinition = "CLOB")
     private String content;
     private LocalDateTime createdAt;
 

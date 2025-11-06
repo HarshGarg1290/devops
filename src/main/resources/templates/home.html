@@ -57,9 +57,9 @@
                             <div class="p-4 rounded-xl bg-gray-800 border border-gray-800">
                                 <h3 class="text-lg font-semibold mb-3 text-gray-100">Subscribe</h3>
                                 <p class="text-sm text-gray-300 mb-3">Get the latest articles delivered to your inbox.</p>
-                                <form class="flex gap-2">
-                                    <input type="email" placeholder="you@example.com" class="flex-1 rounded-md border border-gray-700 px-3 py-2 bg-gray-900 text-sm text-gray-200" />
-                                    <button class="px-3 py-2 bg-accent text-white rounded-md text-sm">Subscribe</button>
+                                <form class="flex gap-2 items-center">
+                                    <input aria-label="Email" type="email" placeholder="you@example.com" class="flex-1 rounded-md border border-gray-700 px-3 py-2 bg-gray-900 text-sm text-gray-200" />
+                                    <button type="submit" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-md text-sm">Subscribe</button>
                                 </form>
                             </div>
                         </div>
@@ -72,15 +72,15 @@
                             <h2 class="text-2xl font-bold mb-4">Featured Articles</h2>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div th:each="post,iterStat : ${posts}" th:if="${iterStat.index} &lt; 3" class="bg-gray-800 border border-gray-800 rounded-xl shadow-sm overflow-hidden">
-                                    <div class="h-44 bg-cover bg-center" style="background-image: url('https://picsum.photos/seed/${iterStat.index}/1200/600')"></div>
-                                    <div class="p-5">
-                                        <div class="flex items-center justify-between mb-2">
-                                            <p class="text-sm text-gray-300">By <span th:text="${post.user.username}"></span></p>
-                                            <p class="text-sm text-gray-400" th:text="${#temporals.format(post.createdAt, 'dd MMM yyyy')}"></p>
+                                    <div class="h-44 bg-cover bg-center rounded-t-xl" style="background-image: url('https://picsum.photos/seed/${iterStat.index}/1200/600')"></div>
+                                        <div class="p-6 bg-gray-800">
+                                            <div class="flex items-center justify-between mb-3">
+                                                <p class="text-sm text-gray-300">By <span th:text="${post.user.username}"></span></p>
+                                                <p class="text-sm text-gray-400" th:text="${#temporals.format(post.createdAt, 'dd MMM yyyy')}"></p>
+                                            </div>
+                                            <h3 class="font-semibold text-xl mb-3 line-clamp-2 text-gray-100" th:text="${post.content.length() &gt; 120} ? ${post.content.substring(0,120)} + '...' : ${post.content}"></h3>
+                                            <a th:href="@{'/post/' + ${post.id}}" class="inline-block mt-3 text-sm px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-semibold">Read More</a>
                                         </div>
-                                        <h3 class="font-semibold text-lg mb-2 line-clamp-2 text-gray-100" th:text="${post.content.length() &gt; 120} ? ${post.content.substring(0,120)} + '...' : ${post.content}"></h3>
-                                        <a th:href="@{'/post/' + ${post.id}}" class="inline-block mt-3 text-sm bg-primary/10 text-primary px-3 py-2 rounded-md font-semibold">Read More</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -93,15 +93,15 @@
                             </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                                 <div th:each="post : ${posts}" class="bg-gray-800 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
-                                    <div class="h-40 bg-cover bg-center" style="background-image: url('https://picsum.photos/seed/${post.id}/1200/600')"></div>
-                                    <div class="p-4">
+                                    <div class="h-40 bg-cover bg-center rounded-t-md" style="background-image: url('https://picsum.photos/seed/${post.id}/1200/600')"></div>
+                                    <div class="p-4 bg-gray-800">
                                         <div class="flex items-center justify-between mb-2">
-                                            <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-2 py-1 rounded-full">Article</span>
+                                            <span class="inline-block bg-indigo-800 text-indigo-200 text-xs font-semibold px-2 py-1 rounded-full">Article</span>
                                             <div class="text-sm text-gray-300">By <span th:text="${post.user.username}"></span> • <span th:text="${#temporals.format(post.createdAt, 'dd MMM yyyy')}"></span></div>
                                         </div>
                                         <h3 class="text-gray-100 font-medium mb-2 line-clamp-3" th:text="${post.content.length() &gt; 180} ? ${post.content.substring(0,180)} + '...' : ${post.content}"></h3>
                                         <div class="flex items-center justify-between mt-3">
-                                            <a th:href="@{'/post/' + ${post.id}}" class="text-primary text-sm font-semibold">Read More →</a>
+                                            <a th:href="@{'/post/' + ${post.id}}" class="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded-md font-semibold">Read More →</a>
                                             <div class="text-sm text-gray-400">&nbsp;</div>
                                         </div>
                                     </div>
