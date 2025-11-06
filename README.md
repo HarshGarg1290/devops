@@ -30,6 +30,12 @@ Comprehensive guide for the FullStack Blogging App (Spring Boot + Thymeleaf) and
 - Contributing
 - License
 
+TL;DR
+-----
+
+InsightFeed (a.k.a. FullStack-Blogging-App) is a small Spring Boot + Thymeleaf blogging application packaged for Docker and Kubernetes, with example Helm and Terraform artifacts for deploying to EKS. It's intended as a development/lab prototype (file-backed H2 DB and auto-DDL enabled).
+
+
 ---
 
 ## Prerequisites
@@ -63,6 +69,32 @@ App defaults to port 8080. H2 console is enabled at `/h2-console` (see `src/main
 
 Notes:
 - Development uses `spring.jpa.hibernate.ddl-auto=create` so the schema is created on startup. This is fine for local/dev but remove or replace with migrations for production.
+
+How to demo (5 minutes)
+-----------------------
+
+Use this quick path during a panel or demo to show the app running locally or on the cluster.
+
+Local (fast):
+
+```bash
+./mvnw -DskipTests package
+docker build -t insightfeed:local -f Dockerfile.multi .
+docker run --rm -p 8080:8080 insightfeed:local
+# Open http://localhost:8080
+```
+
+On Kubernetes (quick):
+
+```bash
+helm upgrade --install bloggingapp ./k8s/helm/FullStack-Blogging-App -n webapps --create-namespace \
+  --set image.repository=692522859847.dkr.ecr.us-east-1.amazonaws.com/devops38-blog \
+  --set image.tag=clob-fix
+# then
+kubectl -n webapps get svc fullstack-blogging-app -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+```
+
+This will let you open the app's LoadBalancer URL and show seeded posts / the UI quickly.
 
 ---
 
@@ -189,6 +221,25 @@ If you want, I can add a `CONTRIBUTING.md` and a pre-commit hook to block accide
 ## License
 
 Include your preferred license here. If none is present, add one (for example, `MIT` or `Apache-2.0`).
+
+Maintainers & status
+--------------------
+
+Maintainers: Harsh Garg (update contact details in repo settings).
+
+Status: prototype / demo — the repository is configured for development and demos (file-backed H2 database, `spring.jpa.hibernate.ddl-auto=create`). It is NOT configured for production use out-of-the-box.
+
+Security & production notes
+---------------------------
+
+- The app uses a local/file-backed H2 database for convenience. For production, replace with a managed RDBMS (Postgres/MySQL/RDS) and add Flyway or Liquibase for schema migrations.
+- Move secrets (DB credentials, registry keys) to a secret manager (AWS Secrets Manager, SSM Parameter Store, Vault) and avoid baking credentials into images or source.
+- Re-enable CSRF, tighten `SecurityConfig`, and add proper session management, HTTPS, and secure cookies for production.
+
+Recommended license
+-------------------
+
+I recommend adding an explicit license file (MIT or Apache-2.0). If you'd like, I can add an `LICENSE` file with MIT text.
 
 ---
 
