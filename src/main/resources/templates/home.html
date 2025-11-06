@@ -14,24 +14,24 @@
     </style>
   
 </head>
-<body class="bg-background-light dark:bg-background-dark text-[#111827] dark:text-gray-200">
+<body class="bg-gray-900 text-gray-100">
     <div class="min-h-screen flex flex-col">
-        <header class="sticky top-0 z-20 bg-white/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
+    <header class="sticky top-0 z-20 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
             <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center gap-4">
                         <span class="material-symbols-outlined text-primary text-3xl">hub</span>
                         <a th:href="@{/}" class="text-xl font-bold">InsightFeed</a>
                         <nav class="hidden md:flex items-center gap-6 ml-6">
-                            <a th:href="@{/}" class="text-sm font-medium text-primary">Home</a>
+                            <a th:href="@{/}" class="text-sm font-medium text-gray-100">Home</a>
                             <a th:href="@{/add}" class="text-sm font-medium hover:text-primary transition">Add Post</a>
                             <a th:href="@{/logout}" class="text-sm font-medium hover:text-primary transition">Logout</a>
                         </nav>
                     </div>
                     <div class="flex items-center gap-3">
-                        <label class="relative hidden sm:block">
+                            <label class="relative hidden sm:block">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
-                            <input placeholder="Search articles..." class="pl-10 pr-4 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" />
+                            <input placeholder="Search articles..." class="pl-10 pr-4 py-2 rounded-md border border-gray-800 bg-gray-800 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" />
                         </label>
                         <a th:href="@{/login}" class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md text-sm font-semibold">Log In</a>
                     </div>
@@ -45,20 +45,20 @@
                     <!-- Sidebar -->
                     <aside class="w-full lg:w-1/4 xl:w-1/5">
                         <div class="space-y-6 sticky top-24">
-                            <div class="p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-                                <h3 class="text-lg font-semibold mb-3">Categories</h3>
-                                <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                            <div class="p-4 rounded-xl bg-gray-800 border border-gray-800">
+                                <h3 class="text-lg font-semibold mb-3 text-gray-100">Categories</h3>
+                                <ul class="space-y-2 text-sm text-gray-300">
                                     <li><a href="#" class="hover:text-primary transition">Design</a></li>
                                     <li><a href="#" class="hover:text-primary transition">Technology</a></li>
                                     <li><a href="#" class="hover:text-primary transition">Productivity</a></li>
                                     <li><a href="#" class="hover:text-primary transition">Marketing</a></li>
                                 </ul>
                             </div>
-                            <div class="p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-                                <h3 class="text-lg font-semibold mb-3">Subscribe</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Get the latest articles delivered to your inbox.</p>
+                            <div class="p-4 rounded-xl bg-gray-800 border border-gray-800">
+                                <h3 class="text-lg font-semibold mb-3 text-gray-100">Subscribe</h3>
+                                <p class="text-sm text-gray-300 mb-3">Get the latest articles delivered to your inbox.</p>
                                 <form class="flex gap-2">
-                                    <input type="email" placeholder="you@example.com" class="flex-1 rounded-md border border-gray-200 dark:border-gray-700 px-3 py-2 bg-white dark:bg-gray-900 text-sm" />
+                                    <input type="email" placeholder="you@example.com" class="flex-1 rounded-md border border-gray-700 px-3 py-2 bg-gray-900 text-sm text-gray-200" />
                                     <button class="px-3 py-2 bg-accent text-white rounded-md text-sm">Subscribe</button>
                                 </form>
                             </div>
@@ -70,15 +70,15 @@
                         <!-- Featured -->
                         <div class="mb-8">
                             <h2 class="text-2xl font-bold mb-4">Featured Articles</h2>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div th:each="post,iterStat : ${posts}" th:if="${iterStat.index} &lt; 3" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm overflow-hidden">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div th:each="post,iterStat : ${posts}" th:if="${iterStat.index} &lt; 3" class="bg-gray-800 border border-gray-800 rounded-xl shadow-sm overflow-hidden">
                                     <div class="h-44 bg-cover bg-center" style="background-image: url('https://picsum.photos/seed/${iterStat.index}/1200/600')"></div>
                                     <div class="p-5">
                                         <div class="flex items-center justify-between mb-2">
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">By <span th:text="${post.user.username}"></span></p>
+                                            <p class="text-sm text-gray-300">By <span th:text="${post.user.username}"></span></p>
                                             <p class="text-sm text-gray-400" th:text="${#temporals.format(post.createdAt, 'dd MMM yyyy')}"></p>
                                         </div>
-                                        <h3 class="font-semibold text-lg mb-2 line-clamp-2" th:text="${post.content.length() &gt; 120} ? ${post.content.substring(0,120)} + '...' : ${post.content}"></h3>
+                                        <h3 class="font-semibold text-lg mb-2 line-clamp-2 text-gray-100" th:text="${post.content.length() &gt; 120} ? ${post.content.substring(0,120)} + '...' : ${post.content}"></h3>
                                         <a th:href="@{'/post/' + ${post.id}}" class="inline-block mt-3 text-sm bg-primary/10 text-primary px-3 py-2 rounded-md font-semibold">Read More</a>
                                     </div>
                                 </div>
@@ -91,15 +91,15 @@
                                 <h2 class="text-2xl font-bold">Latest Articles</h2>
                                 <div class="text-sm text-gray-500">Showing <span th:text="${posts.size()}"></span> posts</div>
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                                <div th:each="post : ${posts}" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm">
+                                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                <div th:each="post : ${posts}" class="bg-gray-800 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
                                     <div class="h-40 bg-cover bg-center" style="background-image: url('https://picsum.photos/seed/${post.id}/1200/600')"></div>
                                     <div class="p-4">
                                         <div class="flex items-center justify-between mb-2">
                                             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-2 py-1 rounded-full">Article</span>
-                                            <div class="text-sm text-gray-500">By <span th:text="${post.user.username}"></span> • <span th:text="${#temporals.format(post.createdAt, 'dd MMM yyyy')}"></span></div>
+                                            <div class="text-sm text-gray-300">By <span th:text="${post.user.username}"></span> • <span th:text="${#temporals.format(post.createdAt, 'dd MMM yyyy')}"></span></div>
                                         </div>
-                                        <h3 class="text-gray-800 dark:text-white font-medium mb-2 line-clamp-3" th:text="${post.content.length() &gt; 180} ? ${post.content.substring(0,180)} + '...' : ${post.content}"></h3>
+                                        <h3 class="text-gray-100 font-medium mb-2 line-clamp-3" th:text="${post.content.length() &gt; 180} ? ${post.content.substring(0,180)} + '...' : ${post.content}"></h3>
                                         <div class="flex items-center justify-between mt-3">
                                             <a th:href="@{'/post/' + ${post.id}}" class="text-primary text-sm font-semibold">Read More →</a>
                                             <div class="text-sm text-gray-400">&nbsp;</div>
@@ -111,10 +111,10 @@
                             <!-- Pagination -->
                             <div class="mt-8 flex items-center justify-center">
                                 <nav class="inline-flex -space-x-px rounded-md" aria-label="Pagination">
-                                    <a href="#" class="px-3 py-2 rounded-l-md border border-gray-200 bg-white text-sm text-gray-500 hover:bg-gray-50">&lt;</a>
+                                    <a href="#" class="px-3 py-2 rounded-l-md border border-gray-800 bg-gray-800 text-sm text-gray-300">&lt;</a>
                                     <a href="#" class="px-3 py-2 bg-primary text-white text-sm font-semibold">1</a>
-                                    <a href="#" class="px-3 py-2 border border-gray-200 bg-white text-sm text-gray-500 hover:bg-gray-50">2</a>
-                                    <a href="#" class="px-3 py-2 rounded-r-md border border-gray-200 bg-white text-sm text-gray-500 hover:bg-gray-50">&gt;</a>
+                                    <a href="#" class="px-3 py-2 border border-gray-800 bg-gray-800 text-sm text-gray-300">2</a>
+                                    <a href="#" class="px-3 py-2 rounded-r-md border border-gray-800 bg-gray-800 text-sm text-gray-300">&gt;</a>
                                 </nav>
                             </div>
                         </div>

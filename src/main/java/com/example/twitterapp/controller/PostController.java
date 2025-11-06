@@ -41,8 +41,24 @@ public class PostController {
     @PostMapping("/add")
     public String addPost(@ModelAttribute Post post) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
+        if (auth == null || !auth.isAuthenticated()) {
+            // not authenticated — redirect to login
+            return "redirect:/login";
+        }
+
+        Object principal = auth.getPrincipal();
+        if (!(principal instanceof CustomUserDetails)) {
+            // principal is not our CustomUserDetails (could be a String for anonymous or different setup)
+            return "redirect:/login";
+        }
+
+        CustomUserDetails user = (CustomUserDetails) principal;
         var existingUser = userService.findByUsername(user.getUsername());
+        if (existingUser == null) {
+            // fallback: cannot resolve user — redirect to login
+            return "redirect:/login";
+        }
+
         post.setUser(existingUser);
         postService.save(post);
         return "redirect:/";

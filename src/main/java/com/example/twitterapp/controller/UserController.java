@@ -23,14 +23,14 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(Model model, User userDto) {
-        model.addAttribute("user", userDto);
+    public String login(Model model) {
+        model.addAttribute("user", new User());
         return "login";
     }
 
     @GetMapping("/register")
-    public String register(Model model, User userDto) {
-        model.addAttribute("user", userDto);
+    public String register(Model model) {
+        model.addAttribute("user", new User());
         return "register";
     }
 
