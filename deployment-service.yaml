@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: abrahimcse/bloggingapp:latest
+          image: 692522859847.dkr.ecr.us-east-1.amazonaws.com/devops38-blog:h2-enabled
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

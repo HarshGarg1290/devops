@@ -7,11 +7,11 @@ output "node_group_id" {
 }
 
 output "vpc_id" {
-  value = aws_vpc.abrahimcse_vpc.id
+  value = var.create_infra ? aws_vpc.abrahimcse_vpc[0].id : var.existing_vpc_id
 }
 
 output "subnet_ids" {
-  value = aws_subnet.abrahimcse_subnet[*].id
+  value = var.create_infra ? aws_subnet.abrahimcse_subnet[*].id : var.existing_subnet_ids
 }
 
 # Useful connection outputs
@@ -26,6 +26,6 @@ output "cluster_certificate_authority_data" {
 }
 
 output "kubeconfig_command_hint" {
-  description = "Command hint to configure kubectl for this cluster"
-  value       = "aws eks --region ${aws_eks_cluster.abrahimcse.region} update-kubeconfig --name ${aws_eks_cluster.abrahimcse.name}"
+  description = "Command hint to configure kubectl for this cluster (replace region if needed)"
+  value       = "aws eks --region ap-southeast-1 update-kubeconfig --name ${aws_eks_cluster.abrahimcse.name}"
 }

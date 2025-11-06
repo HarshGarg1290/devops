@@ -1,0 +1,35 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — InsightFeed</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>body{font-family:'Work Sans',sans-serif}</style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  <div class="min-h-screen flex items-center justify-center px-4">
+    <div class="max-w-md w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm">
+      <h2 class="text-2xl font-semibold mb-4">Login</h2>
+      <div th:if="${param.error}" class="mb-3 text-sm text-red-600">Invalid username or password.</div>
+      <form th:action="@{/login}" method="post" class="space-y-4">
+        <div>
+          <label class="block text-sm mb-1">Username</label>
+          <input th:field="*{username}" type="text" name="username" required class="w-full rounded-md border border-gray-200 dark:border-gray-700 px-3 py-2 bg-white dark:bg-gray-900" />
+        </div>
+        <div>
+          <label class="block text-sm mb-1">Password</label>
+          <input th:field="*{password}" type="password" name="password" required class="w-full rounded-md border border-gray-200 dark:border-gray-700 px-3 py-2 bg-white dark:bg-gray-900" />
+        </div>
+        <div>
+          <button type="submit" class="w-full px-4 py-2 bg-primary text-white rounded-md">Login</button>
+        </div>
+      </form>
+      <p class="mt-4 text-sm">Don't have an account? <a th:href="@{/register}" class="text-primary">Register</a></p>
+    </div>
+  </div>
+</body>
+</html>
+</html>
+

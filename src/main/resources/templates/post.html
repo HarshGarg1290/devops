@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title th:text="${post.user.username} + ' — Post'">Post</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans">
+  <div class="max-w-3xl mx-auto py-10 px-4">
+    <header class="mb-6 flex items-center justify-between">
+      <a th:href="@{/}" class="text-2xl font-bold text-primary">InsightFeed</a>
+      <a th:href="@{/add}" class="px-3 py-2 bg-primary text-white rounded-md text-sm">Add Post</a>
+    </header>
+
+    <article class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm">
+      <div class="mb-3 text-sm text-gray-500 dark:text-gray-400">By <span th:text="${post.user.username}"></span> • <span th:text="${#temporals.format(post.createdAt,'dd MMM yyyy')}"></span></div>
+      <div class="prose dark:prose-invert" th:text="${post.content}"></div>
+    </article>
+
+    <div class="mt-6">
+      <a th:href="@{/}" class="text-sm text-primary">← Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>
