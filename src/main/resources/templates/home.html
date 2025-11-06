@@ -72,7 +72,8 @@
                             <h2 class="text-2xl font-bold mb-4">Featured Articles</h2>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div th:each="post,iterStat : ${posts}" th:if="${iterStat.index} &lt; 3" class="bg-gray-800 border border-gray-800 rounded-xl shadow-sm overflow-hidden">
-                                    <div class="h-44 bg-cover bg-center rounded-t-xl" style="background-image: url('https://picsum.photos/seed/${iterStat.index}/1200/600')"></div>
+                                    <!-- Use Unsplash Source with a deterministic seed per post id for nicer placeholders -->
+                                    <div class="h-44 bg-cover bg-center rounded-t-xl" style="background-image: url('https://source.unsplash.com/1200x600/?technology,blog&sig=${post.id}')"></div>
                                         <div class="p-6 bg-gray-800">
                                             <div class="flex items-center justify-between mb-3">
                                                 <p class="text-sm text-gray-300">By <span th:text="${post.user.username}"></span></p>
@@ -93,7 +94,8 @@
                             </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                                 <div th:each="post : ${posts}" class="bg-gray-800 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
-                                    <div class="h-40 bg-cover bg-center rounded-t-md" style="background-image: url('https://picsum.photos/seed/${post.id}/1200/600')"></div>
+                                    <!-- Unsplash Source provides varied, attractive images. 'sig' helps vary the image per post id. -->
+                                    <div class="h-40 bg-cover bg-center rounded-t-md" style="background-image: url('https://source.unsplash.com/1200x600/?technology,writing&sig=${post.id}')"></div>
                                     <div class="p-4 bg-gray-800">
                                         <div class="flex items-center justify-between mb-2">
                                             <span class="inline-block bg-indigo-800 text-indigo-200 text-xs font-semibold px-2 py-1 rounded-full">Article</span>
