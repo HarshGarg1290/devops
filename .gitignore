@@ -1,0 +1,25 @@
+# Ignore local IDE files
+.idea/
+.vscode/
+
+# Java/Maven
+target/
+*.class
+*.jar
+
+# Terraform
+# Ignore Terraform local directories and state
+EKS_Terraform/.terraform/
+**/.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.tfstate
+.terraform.tfstate.backup
+
+# Provider binaries (sometimes downloaded by terraform)
+*.exe
+
+# OS files
+*.swp
+Thumbs.db
+.DS_Store
