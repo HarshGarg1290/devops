@@ -59,3 +59,19 @@ Notes and recommendations
 - Consider using the official Terraform EKS module (terraform-aws-modules/eks/aws) for production readiness.
 - Add provider version pins and a remote backend for collaborative workflows (we added provider pinning; customize backend). 
 - If you want Terraform to also install the Helm chart, we can add a `helm_release` resource — tell me if you want that and I'll add it (it requires the Helm provider and proper kubeconfig wiring in Terraform).
+ 
+## Important: do NOT commit `.terraform` or provider binaries
+
+Do not commit the `.terraform` directory, provider binaries, or any `*.tfstate` files to git. These are local artifacts (provider plugins, caches, and state) and can be very large; committing them will exceed GitHub's file size limits and pollute repository history.
+
+To set up your local working directory (or CI), run:
+
+```bash
+cd EKS_Terraform
+terraform init
+```
+
+This downloads provider plugins into the local `.terraform` directory. If you accidentally commit a provider binary or state file to the repo, contact the repository owner — removing it from remote history may require a history rewrite (force-push) or migration to Git LFS.
+
+If you must keep large binaries, use Git LFS and migrate existing large objects to LFS before pushing. Prefer not to store provider binaries in source control.
+ 
